@@ -5,15 +5,28 @@ import {Http} from '@angular/http';
 export class InformacionService {
 
   info:any = {}; //guardar informacion 
+  equipo:any[] = []; //guardar informacion 
   cargada:boolean = false;
+  cargadaSobreNostros:boolean = false;
 
   constructor( public http:Http ) {
-    console.log("okkkk");
+    this.cargaInfo();
+    this.cargaSobreNosotros();    
+   }
+   public cargaInfo(){
     this.http.get('./assets/data/info.pagina.json')
-              .subscribe( data => {
-                console.log( data.json() );
+              .subscribe( data => {                
                 this.cargada = true;
                 this.info = data.json();
+              })
+   }
+   //obtine datos de firestore
+   public cargaSobreNosotros(){
+    this.http.get('https://webcodemvs.firebaseio.com/equipo.json')
+              .subscribe( data => {
+                console.log( data.json() );
+                this.cargadaSobreNostros = true;
+                this.equipo = data.json();
               })
    }
 
