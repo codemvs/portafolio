@@ -24,7 +24,7 @@ export class InformacionService {
    public cargaSobreNosotros(){
     this.http.get('https://webcodemvs.firebaseio.com/equipo.json')
               .subscribe( data => {
-                console.log( data.json() );
+                  
                 this.cargadaSobreNostros = true;
                 this.equipo = data.json();
               })
